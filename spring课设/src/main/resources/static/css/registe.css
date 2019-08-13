@@ -1,0 +1,71 @@
+.high{
+    color:red;
+}
+
+.onError{
+    color: red; }
+
+.onSuccess{
+    color: green; }
+
+.viewFlow{
+    overflow-y: scroll;
+}
+
+.orderTime{
+    float: right;
+}
+
+.tableR {
+    width: 14%;
+    float: left;
+    max-width: 100%;
+    margin-bottom: 10px;
+    border-spacing: 0;
+    border-collapse: collapse;
+    border: 1px solid #eceeef;
+}
+.tableR thead {
+    background: #f9f9f9;
+}
+.tableR th,
+.tableR td {
+    font-size: 12px;
+    padding: 10px;
+    line-height: 1.5;
+    vertical-align: top;
+    border-top: 1px solid #eceeef;
+}
+.tableR th {
+    vertical-align: bottom;
+    border-bottom: 1px solid #eceeef;
+    font-weight: normal;
+    font-size: 14px;
+}
+.tableR-bordered {
+    border: 1px solid #eceeef;
+}
+.tableR-bordered th,
+.tableR-bordered td {
+    border: 1px solid #eceeef;
+    vertical-align: middle;
+}
+.tableR-hover tbody tr:hover {
+    background-color: #f9f9f9;
+}
+.tableR-striped tbody tr:nth-of-type(even) {
+    background-color: #f9f9f9;
+}
+
+.number{
+    text-align: center;
+    height: 35px;
+}
+.number a{
+    display: block;
+}
+
+.number-hover a:hover{
+    color: #2d363f;
+    background-color: #3bb4f2;
+}
