@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>添加药品</title>
+    <meta name="keywords" content="设置关键词..."/>
+    <meta name="description" content="设置描述..."/>
+    <meta name="author" content="DeathGhost"/>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <link rel="icon" th:href="@{/images/icon/favicon.ico}"
+          type="image/x-icon">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <script th:src="@{/javascript/jquery.js}"></script>
+    <script th:src="@{/javascript/plug-ins/customScrollbar.min.js}"></script>
+    <script th:src="@{/javascript/plug-ins/layerUi/layer.js}"></script>
+    <script th:src="@{/javascript/plug-ins/pagination.js}"></script>
+    <script th:src="@{/javascript/public.js}"></script>
+</head>
+<body>
+<div class="main-wrap">
+    <div class="side-nav" th:insert="~{pharmacyAdmin/pharmacy_admin_index :: pmenu}">
+    </div>
+    <div class="content-wrap">
+        <header class="top-hd" th:insert="~{pharmacyAdmin/pharmacy_admin_index :: pheader}"></header>
+        <main class="main-cont content mCustomScrollbar">
+            <!--开始::内容-->
+            <form action="/addDrugDo" th:action="@{/addDrugDo}" method="post">
+                <div class="form-group-col-2">
+                    <div class="form-label">药品编号：</div>
+                    <div class="form-cont">
+                        <input type="text" name="id" placeholder="编号" class="form-control form-boxed">
+                    </div>
+                </div>
+                <div class="form-group-col-2">
+                    <div class="form-label">药品名称：</div>
+                    <div class="form-cont">
+                        <input type="text" name="name" placeholder="名称" class="form-control form-boxed">
+                    </div>
+                </div>
+                <div class="form-group-col-2">
+                    <div class="form-label">药品分类：</div>
+                    <div class="form-cont">
+                        <select style="width:auto;" name="classify" id="classify">
+                            <option th:each="classify:${classifies}" th:value="${classify.classify}" th:text="${classify.classify}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group-col-2">
+                    <div class="form-label">药品库存：</div>
+                    <div class="form-cont">
+                        <input type="text" name="stock" placeholder="库存" class="form-control form-boxed">
+                    </div>
+                </div>
+                <div class="form-group-col-2">
+                    <div class="form-label"></div>
+                    <div class="form-cont">
+                        <input type="submit" class="btn btn-primary" value="添加">
+                    </div>
+                </div>
+            </form>
+            <!--开始::结束-->
+        </main>
+    </div>
+</div>
+</body>
+</html>

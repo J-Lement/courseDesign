@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nchu.hospital_system.mapper.patient.RegisterDao">
+    <resultMap id="DoctorResultMap" type="com.nchu.hospital_system.bean.Doctor">
+        <id property="account" column="account"/>
+        <result property="name" column="name"/>
+        <result property="phone" column="phone"/>
+        <result property="position" column="position"/>
+    </resultMap>
+
+    <resultMap id="OrderTimeResultMap" type="com.nchu.hospital_system.bean.OrderTime">
+        <id property="doctorAccount" column="doctor_account"/>
+        <result property="week" column="day"/>
+        <result property="morning" column="morning"/>
+        <result property="afternoon" column="afternoon"/>
+        <result property="morLeftNum" column="mor_left_num"/>
+        <result property="aftLeftNum" column="aft_left_num"/>
+        <result property="morAllNum" column="mor_all_num"/>
+        <result property="aftAllNum" column="aft_all_num"/>
+    </resultMap>
+
+    <resultMap id="DepartmentResultMap" type="com.nchu.hospital_system.bean.Dept">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="phone" column="phone"/>
+        <result property="address" column="address"/>
+    </resultMap>
+
+    <resultMap id="AssignmentResultMap" type="com.nchu.hospital_system.bean.Assignments">
+        <id property="registerid" column="registerid"/>
+        <result property="patient" column="patient"/>
+        <result property="doctor" column="doctor"/>
+        <result property="time" column="time"/>
+        <result property="num" column="num"/>
+    </resultMap>
+
+    <select id="queryDoctorByDept" parameterType="string" resultMap="DoctorResultMap">
+        select account, name, phone , position
+        from Doctor
+        where dept=#{dept}
+    </select>
+
+    <select id="queryAllDoctor" resultMap="DoctorResultMap">
+        select account, name, phone , position
+        from Doctor
+    </select>
+
+    <select id="queryAllDepartment" resultMap="DepartmentResultMap">
+        select id, name, phone , address
+        from dept
+    </select>
+
+    <insert id="insertPatient" parameterType="com.nchu.hospital_system.bean.Patient">
+        insert into Patient(account, name, age, phone, sex, password)
+        values(#{account},#{name},#{age}, #{phone},#{sex},#{password})
+    </insert>
+
+    <select id="checkPatientAccount" parameterType="string" resultType="int">
+        select count(name)
+        from patient
+        where account=#{account}
+    </select>
+
+    <select id="queryOrderTime" parameterType="string" resultMap="OrderTimeResultMap">
+        select doctor_account, day, morning, afternoon, mor_left_num, aft_left_num, mor_all_num, aft_all_num
+        from ordertime
+        where doctor_account=#{account}
+    </select>
+
+    <select id="queryOrderNumber" resultType="integer" >
+        select number
+        from ordernumber
+        where doctor_account=#{doctorAccount} and date=#{date} and time=#{time} and is_order='0'
+    </select>
+
+    <update id="updateOrderInfo">
+        update ordernumber
+        set is_order=#{is_order}
+        where doctor_account=#{doctorAccount} and date=#{date} and time=#{time} and number=#{number}
+    </update>
+
+    <update id="updateOrderTimeMor">
+        update ordertime
+        set mor_left_num = mor_left_num - 1
+        where doctor_account=#{doctorAccount} and day=#{day}
+    </update>
+
+    <update id="updateOrderTimeAft">
+        update ordertime
+        set aft_left_num = aft_left_num - 1
+        where doctor_account=#{doctorAccount} and day=#{day}
+    </update>
+
+    <insert id="insertAssignment" >
+        insert into assignment(registerid, patient, doctor, time, num)
+        values(1,#{patient},#{doctorAccount},#{date},#{number})
+    </insert>
+
+    <select id="queryAssignmentByPatient" parameterType="string" resultMap="AssignmentResultMap">
+        select registerid, patient, doctor, time, num
+        from assignment
+        where patient=#{patient}
+    </select>
+
+</mapper>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>药品采购</title>
+    <meta name="keywords" content="设置关键词..."/>
+    <meta name="description" content="设置描述..."/>
+    <meta name="author" content="DeathGhost"/>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <link rel="icon" th:href="@{/images/icon/favicon.ico}" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <script th:src="@{/javascript/jquery.js}"></script>
+    <script th:src="@{/javascript/plug-ins/customScrollbar.min.js}"></script>
+    <script th:src="@{/javascript/plug-ins/layerUi/layer.js}"></script>
+    <script th:src="@{/javascript/plug-ins/pagination.js}"></script>
+    <script th:src="@{/javascript/public.js}"></script>
+    <script th:src="@{/javascript/pages/public.js}"></script>
+</head>
+<body>
+<div class="main-wrap">
+    <div class="side-nav" th:insert="~{pharmacyAdmin/pharmacy_admin_index :: pmenu}">
+    </div>
+    <div class="content-wrap">
+        <header class="top-hd" th:insert="~{pharmacyAdmin/pharmacy_admin_index :: pheader}"></header>
+        <main class="main-cont content mCustomScrollbar">
+            <!--开始::内容-->
+            <div class="form-group-col-2">
+                <div class="form-label">药品分类：</div>
+                <div class="form-cont">
+                    <select style="width:auto;" id="purchase_classify">
+                        <option th:each="classify:${classifies}" th:value="${classify.classify}"
+                                th:text="${classify.classify}" th:selected="${classified==classify.classify}"></option>
+                    </select>
+                </div>
+            </div>
+            <table class="table mb-15">
+                <thead>
+                <tr>
+                    <th>药品编号</th>
+                    <th>药品名称</th>
+                    <th>药品分类</th>
+                    <th>库存</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="cen" th:each="drug:${drugs}">
+                    <td th:text="${drug.id}"></td>
+                    <td th:text="${drug.name}"></td>
+                    <td th:text="${drug.classify}"></td>
+                    <td th:text="${drug.stock}"></td>
+                    <td>
+                        <form id="purchaseform" action="/drugPurchase" th:action="@{/drugPurchase}" method="post">
+                            <select style="width:auto;" name="drugstoreid" id="drugstoreid">
+                                <option th:each="drugstore:${drugstores}" th:value="${drugstore.id}"
+                                        th:text="${drugstore.name}"></option>
+                            </select>
+                            <input name="drugid" type="hidden" th:value="${drug.id}">
+                            <input type="text" name="amount" placeholder="采购数量"
+                                   style="padding: 6px 15px !important;font-size: 14px !important;border: 1px solid #ccc;line-height: normal;">
+                            <button id="btn_purchase" class="btn btn-primary radius">采购</button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <!--开始::结束-->
+        </main>
+    </div>
+</div>
+</body>
+</html>

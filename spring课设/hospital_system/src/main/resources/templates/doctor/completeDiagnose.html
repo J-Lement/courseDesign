@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>完成诊断</title>
+    <meta name="keywords" content="设置关键词..."/>
+    <meta name="description" content="设置描述..."/>
+    <meta name="author" content="DeathGhost"/>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <link rel="icon" th:href="@{/images/icon/favicon.ico}" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <script th:src="@{/javascript/jquery.js}"></script>
+    <script th:src="@{/javascript/plug-ins/customScrollbar.min.js}"></script>
+    <script th:src="@{/javascript/plug-ins/layerUi/layer.js}"></script>
+    <script th:src="@{/javascript/plug-ins/pagination.js}"></script>
+    <script th:src="@{/javascript/public.js}"></script>
+    <script th:src="@{/javascript/pages/public.js}"></script>
+    <script th:src="@{/javascript/pages/enddiagnose.js}"></script>
+</head>
+<body>
+<div class="main-wrap">
+    <div class="side-nav" th:insert="~{doctor/doctor_index::dmenu}">
+    </div>
+    <div class="content-wrap">
+        <header class="top-hd" th:insert="~{doctor/doctor_index::dheader}">
+        </header>
+        <main class="main-cont content mCustomScrollbar">
+            <!--开始::内容-->
+            <div class="panel panel-default">
+                            <div class="panel-hd">诊断流程</div>
+                            <div class="panel-bd">
+                                <div class="serial-number">
+                                    <ul>
+                                        <li class="progressing">
+                                            <span>诊断病人</span>
+                                        </li>
+                                        <li class="progressing">
+                                            <span>化验检查</span>
+                                        </li>
+                                        <li class="progressing">
+                                            <span>静脉注射</span>
+                                        </li>
+                                        <li class="progressing">
+                                            <span>处方开药</span>
+                                        </li>
+                                        <li class="progressing">
+                                            <span>完成诊断</span>
+                                        </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-bd">
+                    <span><span class="icon-spin icon-spinner"></span>完成诊断...<span id="num">5</span>秒后返回首页</span>
+                </div>
+            </div>
+            <!--开始::结束-->
+        </main>
+    </div>
+</div>
+</body>
+</html>

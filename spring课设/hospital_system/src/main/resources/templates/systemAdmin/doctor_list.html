@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>医生列表</title>
+    <meta name="keywords" content="设置关键词..."/>
+    <meta name="description" content="设置描述..."/>
+    <meta name="author" content="DeathGhost"/>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <link rel="icon" th:href="@{/images/icon/favicon.ico}" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <script th:src="@{/javascript/jquery.js}"></script>
+    <script th:src="@{/javascript/plug-ins/customScrollbar.min.js}"></script>
+    <script th:src="@{/javascript/plug-ins/layerUi/layer.js}"></script>
+    <script th:src="@{/javascript/plug-ins/pagination.js}"></script>
+    <script th:src="@{/javascript/public.js}"></script>
+    <script th:src="@{/javascript/pages/public.js}"></script>
+</head>
+<body>
+<div class="main-wrap">
+    <div class="side-nav" th:insert="~{systemAdmin/system_admin_index :: smenu}">
+    </div>
+    <div class="content-wrap">
+        <header class="top-hd" th:insert="~{systemAdmin/system_admin_index :: sheader}"></header>
+        <main class="main-cont content mCustomScrollbar">
+            <!--开始::内容-->
+            <table class="table mb-15">
+                <thead>
+                <tr>
+                    <th>医生账号</th>
+                    <th>姓名</th>
+                    <th>职称</th>
+                    <th>联系电话</th>
+                    <th>科室</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="cen" th:each="doctor:${doctors}">
+                    <td th:text="${doctor.account}"></td>
+                    <td th:text="${doctor.name}"></td>
+                    <td th:text="${doctor.position}"></td>
+                    <td th:text="${doctor.phone}"></td>
+                    <td th:text="${doctor.dept}"></td>
+                    <td>
+                        <a title="修改" class="mr-5" th:href="@{edit_doctor?account=}+${doctor.account}">修改</a>
+                        <a title="删除" th:href="@{delete_doctor?account=}+${doctor.account}">删除</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <!--开始::结束-->
+        </main>
+    </div>
+</div>
+</body>
+</html>

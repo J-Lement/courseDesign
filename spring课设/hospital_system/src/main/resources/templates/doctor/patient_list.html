@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>待诊断病人列表</title>
+    <meta name="keywords" content="设置关键词..."/>
+    <meta name="description" content="设置描述..."/>
+    <meta name="author" content="DeathGhost"/>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <link rel="icon" th:href="@{/images/icon/favicon.ico}" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <script th:src="@{/javascript/jquery.js}"></script>
+    <script th:src="@{/javascript/plug-ins/customScrollbar.min.js}"></script>
+    <script th:src="@{/javascript/plug-ins/layerUi/layer.js}"></script>
+    <script th:src="@{/javascript/plug-ins/pagination.js}"></script>
+    <script th:src="@{/javascript/public.js}"></script>
+</head>
+<body>
+<div class="main-wrap">
+    <div class="side-nav" th:insert="~{doctor/doctor_index::dmenu}">
+    </div>
+    <div class="content-wrap">
+        <header class="top-hd" th:insert="~{doctor/doctor_index::dheader}">
+        </header>
+        <main class="main-cont content mCustomScrollbar">
+            <!--开始::内容-->
+            <table class="table mb-15">
+                <thead>
+                <tr>
+                    <th>病人账号</th>
+                    <th>姓名</th>
+                    <th>性别</th>
+                    <th>年龄</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="cen" th:each="patient:${patients}">
+                    <td th:text="${patient.account}"></td>
+                    <td th:text="${patient.name}"></td>
+                    <td th:text="${patient.sex==0?'女':'男'}"></td>
+                    <td th:text="${patient.age}"></td>
+                    <td>
+                        <a title="修改" class="mr-5" th:href="@{diagnose_patient}">开始诊断</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <!--开始::结束-->
+        </main>
+    </div>
+</div>
+</body>
+</html>

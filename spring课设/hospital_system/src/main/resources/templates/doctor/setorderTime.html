@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>设置预约时间</title>
+    <meta name="keywords" content="设置关键词..."/>
+    <meta name="description" content="设置描述..."/>
+    <meta name="author" content="DeathGhost"/>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <link rel="icon" th:href="@{/images/icon/favicon.ico}" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" type="text/css" href="css/registe.css" />
+    <script th:src="@{/javascript/jquery.js}"></script>
+    <script th:src="@{/javascript/plug-ins/customScrollbar.min.js}"></script>
+    <script th:src="@{/javascript/plug-ins/layerUi/layer.js}"></script>
+    <script th:src="@{/javascript/plug-ins/pagination.js}"></script>
+    <script th:src="@{/javascript/public.js}"></script>
+</head>
+<body>
+<div class="main-wrap">
+    <div class="side-nav" th:fragment="dmenu">
+        <div class="side-logo">
+            <div class="logo">
+				<span class="logo-ico">
+					<i class="i-l-1"></i>
+					<i class="i-l-2"></i>
+					<i class="i-l-3"></i>
+				</span>
+                <strong>医院管理系统</strong>
+            </div>
+        </div>
+
+        <nav class="side-menu content mCustomScrollbar" data-mcs-theme="minimal-dark">
+            <h2>
+                <a href="doctor_index" class="InitialPage"><i class="icon-dashboard"></i>首页</a>
+            </h2>
+            <ul>
+                <li>
+                    <dl>
+                        <dt>
+                            <i class="icon-columns"></i>诊断<i class="icon-angle-right"></i>
+                        </dt>
+                        <dd>
+                            <a th:href="@{patient_list?account=}+${session.user}" >待诊断病人</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li>
+                    <dl>
+                        <dt>
+                            <i class="icon-columns"></i>挂号预约设置<i class="icon-angle-right"></i>
+                        </dt>
+                        <dd>
+                            <a th:href="@{set_order_time?account=}+${session.user}" >设置预约时间</a>
+                        </dd>
+                    </dl>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="content-wrap">
+        <header class="top-hd" th:fragment="dheader">
+            <div class="hd-lt">
+                <a class="icon-reorder"></a>
+            </div>
+            <div class="hd-rt">
+                <ul>
+                    <li>
+                        <a><i class="icon-user"></i>医生:<em>[[${session.user}]]</em></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" id="JsSignOut"><i class="icon-signout"></i>安全退出</a>
+                    </li>
+                </ul>
+            </div>
+        </header>
+        <main class="main-cont content mCustomScrollbar">
+            <!--开始::内容-->
+            <div th:each="order:${orderList}">
+                <table class="tableR tableR-bordered tableR-striped tableR-hover">
+                    <!--<thead>-->
+                    <tr>
+                        <th colspan="2" th:text="${order.weekDay}"></th>
+                    </tr>
+                    <tr>
+                        <th colspan="2" th:text="${order.day}"></th>
+                    </tr>
+                    <tr>
+                        <td>上午</td>
+                        <td>下午</td>
+                    </tr>
+                    <tr>
+                        <td style="height: 38px"><input class="form-control form-boxed" style="width:50px;" type="text" th:value="${order.morAllNum}"></td>
+                        <td style="height: 38px"><input class="form-control form-boxed" style="width:50px;" type="text" th:value="${order.aftAllNum}"></td>
+                    </tr>
+                </table>
+            </div>
+            <div style="clear: both"></div>
+
+            <input class="btn btn-primary radius" type="button" id="btn" value="提交">
+            <!--开始::结束-->
+        </main>
+    </div>
+</div>
+</body>
+</html>
